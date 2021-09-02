@@ -5,20 +5,20 @@
 #include <iostream>
 
 using namespace std;
-bool Llamada, Mensajes, Combos, Internet, PrecioDolar,CantidadMinutos;
-bool CLLN, CLLIN, CPLLI;//Costo llamada Nacional(CLlN),Costo llamada intenacional(CLlIN), Costo promoción llamada internacional(CPLLI);
-bool GA,GB,GC,GD,GE,GF;
-int OpcMenu, OpcLlamadas;
+float Llamada, Mensajes, Combos, Internet, PrecioDolar,CantidadMinutos;
+int CLLN, CLLIN, CPLLI;//Costo llamada Nacional(CLlN),Costo llamada intenacional(CLlIN), Costo promoción llamada internacional(CPLLI);
+float GA,GB,GC1,GC2,GD,GE,GF,Grupo;// Contendrá las tarifas de llamadas intenacionales y del grupo que selecionen.
+int OpcMenu, OpcLlamadas,OpcLLIN;
 CLLN = 40.351;
-CLLIN =10000;
-//PrecioDolar = ;
-//GA=0.1377;
-//GB=0.3098;
-//GC=0.1377;
-//GD=0.5508;
-//GE=1.0328;
-//GF=4.4179;
-
+PrecioDolar = 621.05;
+GA=0.1377;
+GB=0.3098;
+GC1=0.1377;
+GC2=0.3213;
+GD=0.5508;
+GE=1.0328;
+GF=4.4179;
+Grupo=0;
 //OpcLlamadas;//Grupo
 
 
@@ -52,9 +52,34 @@ cout << "Selecione un Grupo al que pertenezca el país: " << endl;
 cout << "Selecione un Grupo al que pertenezca el país: " << endl;
 cin >> CLLIN;
 switch (CLLIN){
-case 1: cout << "El precio por minuto es de:"<< char(36) << GA << endl;
+    case 1: Grupo = GA;
+    break;
+    case 2: Grupo = GB;
+    break;
+    case 3: Grupo = GC1;
+    break;
+    case 4: Grupo = GC2;
+    break;
+    case 5: Grupo = GD;
+    break;
+    case 6: Grupo = GE;
+    break;
+    case 7: Grupo = GF;
+    break;
+    default: Grupo = 0;
+        cout << "Lo sentimos la opción que usted intentó no es válida" <<endl;
+}
+if ( Grupo != 0 ){
+cout << "El precio por minuto es de:"<< char(36) << Grupo<< endl;
 cout << "¿Cuántos minutos desea calcular?" << endl;
 cin >> CantidadMinutos;
+Llamada =(CantidadMinutos/60) * ((Grupo * PrecioDolar)*60);
+cout << "El costo es: " <<Llamada << " colones" << endl;
+cout << " " << endl;
+cout << "¡Gracias por utilizar nuestro servicios! " << endl;
+}
+else if ( Grupo == 0 ){
+cout << "¡Gracias por utilizar nuestro servicios! " << endl;
 }
 }else if( OpcLlamadas == 3 ){
 cout << "El costo por minuto en llamadas nacionales es de: " <<  GA << endl;
