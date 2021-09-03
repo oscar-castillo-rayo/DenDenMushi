@@ -6,12 +6,13 @@
 
 using namespace std;
 float Llamada, Mensajes, Combos, Internet, PrecioDolar,CantidadMinutos;
-int CLLN, CLLIN, CPLLI;//Costo llamada Nacional(CLlN),Costo llamada intenacional(CLlIN), Costo promoción llamada internacional(CPLLI);
+int CLLIN, PackNi, PackPa, PackEEUU, PackLLIN;// Costo llamada intenacional(CLlIN), Paquetes llamadas internacionales
+float CLLN, CPLLI;//Costo llamada Nacional(CLlN), Costo promoción llamada internacional(CPLLI);
 float GA,GB,GC1,GC2,GD,GE,GF,Grupo;// Contendrá las tarifas de llamadas intenacionales y del grupo que selecionen.
 int OpcMenu, OpcLlamadas,OpcLLIN;
-CLLN = 40.351;
+CLLN = 40.351; // Precio llamada nacional
 PrecioDolar = 621.05;
-GA=0.1377;
+GA=0.1377; //Precios internacionales
 GB=0.3098;
 GC1=0.1377;
 GC2=0.3213;
@@ -19,9 +20,12 @@ GD=0.5508;
 GE=1.0328;
 GF=4.4179;
 Grupo=0;
-//OpcLlamadas;//Grupo
+Llamada=0;
 
-
+PackNi=3100 //Precios de paquetes internacionales
+PackPa=900
+PackEEUU=1200
+PackLLIN=0
 static_cast<bool>(cout << "Selecione una opción: " << endl);
 cout << "";
 cout << "Tarifa de llamadas" << endl;
@@ -31,59 +35,76 @@ cout << "Combos llamadas,SMS,internet" << endl;
 cin >> OpcMenu;
 
 switch (OpcMenu) {
-case 1: cout << "Que tipo tarifas  de llamadas desea verificar:" << endl;
-cout << " " << endl;
-cout << "1.Nacionales:" << endl;
-cout << "2.Internacionales:" << endl;
-cout << "2.Promoción llamadas internacionales:" << endl;
-cin >> OpcLlamadas;
-if(OpcLlamadas == 1 ) {
-cout << "El costo por minuto en llamadas nacionales es de: " << CLLN << endl;
+    case 1: cout << "Que tipo tarifas  de llamadas desea verificar:" << endl;
+            cout << " " << endl;
+            cout << "1.Nacionales:" << endl;
+            cout << "2.Internacionales:" << endl;
+            cout << "2.Paquetes llamadas internacionales:" << endl;
+            cin >> OpcLlamadas;
+        if(OpcLlamadas == 1 ) {
+            cout << "El costo por minuto en llamadas nacionales es de: " << CLLN << endl;
+            cout << " " << endl;
+            cout << "¿Cuántos minutos desea calcular?" << endl;
+            cin >> CantidadMinutos;
+            Llamada =(CantidadMinutos/60) * ((CLLN)*60);
+            cout << "El monto es " << Llamada << " colones " << endl;
+        }else if( OpcLlamadas == 2 ){
+            cout << "Selecione un Grupo al que pertenezca el país: " << endl;
+            cout << "  " << endl;
+            cout << "GRUPO A: Estados Unidos, Canadá, México, Puerto Rico, Hawai, Alaska, Islas Vírgenes " << endl;
+            cout << "GRUPO B: Colombia, Sur América, Caribe excepto cuba, Corea del Sur, Taiwán y Japón " << endl;
+            cout << "GRUPO C1: Belice, Guatemala, Honduras, El Salvador y Panamá " << endl;
+            cout << "GRUPO C2: Nicaragua " << endl;
+            cout << "GRUPO D: Europa, Singapur, Tailandia, Australia y Nueva Zelanda " << endl;
+            cout << "GRUPO E: Cuba y Resto del Mundo " << endl;
+            cout << "GRUPO F: Inmarsat, Iridium y Thuraya (satélites para barcos o aviones) " << endl;
+            cin >> CLLIN;
+            switch (CLLIN){
+                case 1: Grupo = GA;
+                break;
+                case 2: Grupo = GB;
+                break;
+                case 3: Grupo = GC1;
+                break;
+                case 4: Grupo = GC2;
+                break;
+                case 5: Grupo = GD;
+                break;
+                case 6: Grupo = GE;
+                break;
+                case 7: Grupo = GF;
+                break;
+                default: Grupo = 0;
+                    cout << "Lo sentimos la opción que usted intentó no es válida" <<endl;
+            }
+                if ( Grupo != 0 ){
+                    cout << "El precio por minuto es de:"<< char(36) << Grupo<< endl;
+                    cout << "¿Cuántos minutos desea calcular?" << endl;
+                    cin >> CantidadMinutos;
+                        Llamada =(CantidadMinutos/60) * ((Grupo * PrecioDolar)*60);
+                    cout << "El costo es: " <<Llamada << " colones" << endl;
+                    cout << " " << endl;
+                    cout << "¡Gracias por utilizar nuestro servicios! " << endl;
+                }else if ( Grupo == 0 ){
+                    cout << "¡Gracias por utilizar nuestro servicios! " << endl;
+                    }
+                    }else if( OpcLlamadas == 3 ){
+                    cout << "1.Paquete Nicaragua (20min) valor:" <<  PackNi << endl;
+                    cout << "2.Paquete Panamá " <<  PackPa << endl;
+                    cout << "3.Paquete Estados Unidos " <<  PackEEUU << endl;
+                    cin >> PackLLIN;
+                    if (PackLLIN==1 or PackLLIN == 2 or PackLLIN ==3 ){
+                        cout << "Su paquete ha sido activado con éxito!" << endl;
+                        cout << " " << endl;
+                        cout << " Gracias por utilizar nuestro servicio" << endl;
+                    }else {
+                        cout << "Lo sentimos su opción no es válida" << endl;
+                        cout << " " << endl;
+                        cout << " Gracias por utilizar nuestro servicio" << endl;
 
-}else if( OpcLlamadas == 2 ){
-cout << "Selecione un Grupo al que pertenezca el país: " << endl;
-cout << "  " << endl;
-cout << "GRUPO A: Estados Unidos, Canadá, México, Puerto Rico, Hawai, Alaska, Islas Vírgenes " << endl;
-cout << "Selecione un Grupo al que pertenezca el país: " << endl;
-cout << "Selecione un Grupo al que pertenezca el país: " << endl;
-cout << "Selecione un Grupo al que pertenezca el país: " << endl;
-cout << "Selecione un Grupo al que pertenezca el país: " << endl;
-cout << "Selecione un Grupo al que pertenezca el país: " << endl;
-cout << "Selecione un Grupo al que pertenezca el país: " << endl;
-cin >> CLLIN;
-switch (CLLIN){
-    case 1: Grupo = GA;
-    break;
-    case 2: Grupo = GB;
-    break;
-    case 3: Grupo = GC1;
-    break;
-    case 4: Grupo = GC2;
-    break;
-    case 5: Grupo = GD;
-    break;
-    case 6: Grupo = GE;
-    break;
-    case 7: Grupo = GF;
-    break;
-    default: Grupo = 0;
-        cout << "Lo sentimos la opción que usted intentó no es válida" <<endl;
-}
-if ( Grupo != 0 ){
-cout << "El precio por minuto es de:"<< char(36) << Grupo<< endl;
-cout << "¿Cuántos minutos desea calcular?" << endl;
-cin >> CantidadMinutos;
-Llamada =(CantidadMinutos/60) * ((Grupo * PrecioDolar)*60);
-cout << "El costo es: " <<Llamada << " colones" << endl;
-cout << " " << endl;
-cout << "¡Gracias por utilizar nuestro servicios! " << endl;
-}
-else if ( Grupo == 0 ){
-cout << "¡Gracias por utilizar nuestro servicios! " << endl;
-}
-}else if( OpcLlamadas == 3 ){
-cout << "El costo por minuto en llamadas nacionales es de: " <<  GA << endl;
-}
+                    }
+
+                }
 //break;
 //
 //case 2:;
