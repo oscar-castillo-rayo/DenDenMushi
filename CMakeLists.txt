@@ -3,4 +3,4 @@ project(DenDenMushi)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(DenDenMushi main.cpp Kolbi.h)
+add_executable(DenDenMushi main.cpp Kolbi.h KolbiVariables.h)

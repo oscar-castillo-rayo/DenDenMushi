@@ -6,11 +6,16 @@ using namespace std;
 
 int main() {
     int a, b;
+    string OpcMenu;
     cout << "Bienvenido al sistema de consultas" << endl;
-
     cout << "presione una tecla para continuar..." << endl;
-
-    ProgramaDeLlamadas();
+    OpcMenu = "Y";
+    do {
+        ProgramaDeLlamadas();
+        cout << " " << endl;
+        cout << "¿Desea realizar otra transacción? Y/N";
+        cin >> OpcMenu;
+    } while (OpcMenu != "n" or OpcMenu != "N");
 
     return 0;
 }
